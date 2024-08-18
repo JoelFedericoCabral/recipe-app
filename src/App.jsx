@@ -6,7 +6,6 @@ import RecipeList from './components/RecipeList';
 function App() {
   const [recipes, setRecipes] = useState([]);
 
-  // Cargar recetas desde localStorage al iniciar la aplicación
   useEffect(() => {
     const storedRecipes = localStorage.getItem('recipes');
     if (storedRecipes) {
@@ -14,7 +13,6 @@ function App() {
     }
   }, []);
 
-  // Guardar recetas en localStorage cada vez que cambien
   useEffect(() => {
     localStorage.setItem('recipes', JSON.stringify(recipes));
   }, [recipes]);
@@ -30,7 +28,7 @@ function App() {
   return (
     <div>
       <h1>Gestor de Recetas</h1>
-      <RecipeForm addRecipe={addRecipe} />
+      <RecipeForm addRecipe={addRecipe} recipes={recipes} />
       <RecipeList recipes={recipes} onDelete={deleteRecipe} />
     </div>
   );

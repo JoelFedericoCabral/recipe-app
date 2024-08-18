@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 
-function RecipeForm({ addRecipe }) {
+function RecipeForm({ addRecipe, recipes }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Validar que no haya recetas duplicadas
+    if (recipes.some(recipe => recipe.name.toLowerCase() === name.toLowerCase())) {
+      alert('Ya existe una receta con ese nombre.');
+      return;
+    }
+
     addRecipe({ name, description });
     setName('');
     setDescription('');
