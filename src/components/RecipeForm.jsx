@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function RecipeForm({ addRecipe, recipes }) {
+function RecipeForm({ addRecipe, recipes, recipeToEdit, updateRecipe }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
+  // Si estamos editando, rellenar el formulario con los valores actuales de la receta
+  useEffect(() => {
+    if (recipeToEdit) {
+      setName(recipeToEdit.name);
+      setDescription(recipeToEdit.description);
+    }
+  }, [recipeToEdit]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Validar que no haya recetas duplicadas
-    if (recipes.some(recipe => recipe.name.toLowerCase() === name.toLowerCase())) {
-      alert('Ya existe una receta con ese nombre.');
-      return;
+
+    if (recipeToEdit) {
+      updateRecipe({ name, description });
+    } else {
+      if (recipes.some(recipe => recipe.name.toLowerCase() === name.toLowerCase())) {
+        alert('Ya existe una receta con ese nombre.');
+        return;
+      }
+      addRecipe({ name, description });
     }
 
-    addRecipe({ name, description });
     setName('');
     setDescription('');
   };
@@ -28,6 +39,7 @@ function RecipeForm({ addRecipe, recipes }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          disabled={!!recipeToEdit} // Deshabilitar el campo nombre al editar
         />
       </div>
       <div>
@@ -39,7 +51,7 @@ function RecipeForm({ addRecipe, recipes }) {
           required
         ></textarea>
       </div>
-      <button type="submit">Agregar Receta</button>
+      <button type="submit">{recipeToEdit ? 'Actualizar Receta' : 'Agregar Receta'}</button>
     </form>
   );
 }

@@ -2,9 +2,12 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import RecipeForm from './components/RecipeForm';
 import RecipeList from './components/RecipeList';
+import SearchBar from './components/SearchBar';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
+  const [recipeToEdit, setRecipeToEdit] = useState(null);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     const storedRecipes = localStorage.getItem('recipes');
@@ -21,15 +24,42 @@ function App() {
     setRecipes([...recipes, recipe]);
   };
 
+  const updateRecipe = (updatedRecipe) => {
+    setRecipes(
+      recipes.map((recipe) =>
+        recipe.name === updatedRecipe.name ? updatedRecipe : recipe
+      )
+    );
+    setRecipeToEdit(null);
+  };
+
   const deleteRecipe = (name) => {
     setRecipes(recipes.filter((recipe) => recipe.name !== name));
   };
 
+  const editRecipe = (recipe) => {
+    setRecipeToEdit(recipe);
+  };
+
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.name.toLowerCase().includes(query.toLowerCase())
+  );
+
   return (
     <div>
       <h1>Gestor de Recetas</h1>
-      <RecipeForm addRecipe={addRecipe} recipes={recipes} />
-      <RecipeList recipes={recipes} onDelete={deleteRecipe} />
+      <SearchBar query={query} setQuery={setQuery} />
+      <RecipeForm 
+        addRecipe={addRecipe} 
+        recipes={recipes} 
+        recipeToEdit={recipeToEdit} 
+        updateRecipe={updateRecipe} 
+      />
+      <RecipeList 
+        recipes={filteredRecipes} 
+        onDelete={deleteRecipe} 
+        onEdit={editRecipe} 
+      />
     </div>
   );
 }
