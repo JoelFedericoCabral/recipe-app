@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 function RecipeForm({ addRecipe, recipes, recipeToEdit, updateRecipe }) {
+  // Estado para manejar el nombre y la descripción de la receta
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  // Si estamos editando, rellenar el formulario con los valores actuales de la receta
+  // Rellenar el formulario con la receta que se está editando
   useEffect(() => {
     if (recipeToEdit) {
       setName(recipeToEdit.name);
@@ -12,19 +13,24 @@ function RecipeForm({ addRecipe, recipes, recipeToEdit, updateRecipe }) {
     }
   }, [recipeToEdit]);
 
+  // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (recipeToEdit) {
+      // Actualizar receta existente
       updateRecipe({ name, description });
     } else {
+      // Validar que no haya recetas duplicadas
       if (recipes.some(recipe => recipe.name.toLowerCase() === name.toLowerCase())) {
         alert('Ya existe una receta con ese nombre.');
         return;
       }
+      // Agregar nueva receta
       addRecipe({ name, description });
     }
 
+    // Limpiar el formulario después de agregar o actualizar la receta
     setName('');
     setDescription('');
   };

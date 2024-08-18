@@ -5,10 +5,16 @@ import RecipeList from './components/RecipeList';
 import SearchBar from './components/SearchBar';
 
 function App() {
+  // Estado para almacenar las recetas
   const [recipes, setRecipes] = useState([]);
+
+  // Estado para manejar la receta que está siendo editada
   const [recipeToEdit, setRecipeToEdit] = useState(null);
+
+  // Estado para manejar el texto de búsqueda
   const [query, setQuery] = useState('');
 
+  // Cargar las recetas desde localStorage cuando se monta el componente
   useEffect(() => {
     const storedRecipes = localStorage.getItem('recipes');
     if (storedRecipes) {
@@ -16,31 +22,37 @@ function App() {
     }
   }, []);
 
+  // Guardar las recetas en localStorage cada vez que cambian
   useEffect(() => {
     localStorage.setItem('recipes', JSON.stringify(recipes));
   }, [recipes]);
 
+  // Agregar una nueva receta
   const addRecipe = (recipe) => {
     setRecipes([...recipes, recipe]);
   };
 
+  // Actualizar una receta existente
   const updateRecipe = (updatedRecipe) => {
     setRecipes(
       recipes.map((recipe) =>
         recipe.name === updatedRecipe.name ? updatedRecipe : recipe
       )
     );
-    setRecipeToEdit(null);
+    setRecipeToEdit(null); // Limpiar el estado de edición después de actualizar
   };
 
+  // Eliminar una receta
   const deleteRecipe = (name) => {
     setRecipes(recipes.filter((recipe) => recipe.name !== name));
   };
 
+  // Seleccionar una receta para editar
   const editRecipe = (recipe) => {
     setRecipeToEdit(recipe);
   };
 
+  // Filtrar las recetas según la consulta de búsqueda
   const filteredRecipes = recipes.filter((recipe) =>
     recipe.name.toLowerCase().includes(query.toLowerCase())
   );
@@ -55,7 +67,7 @@ function App() {
         recipeToEdit={recipeToEdit} 
         updateRecipe={updateRecipe} 
       />
-      <h2>Lista de Recetas</h2>
+      <h2>Lista de recetas</h2>
       <RecipeList 
         recipes={filteredRecipes} 
         onDelete={deleteRecipe} 
