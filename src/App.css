@@ -1,34 +1,74 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
-  padding: 20px;
+  padding: 0;
   margin: 0;
+  background-image: url('./assets/recipes_backgrond.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Para centrar verticalmente */
 }
 
-h1 {
-  color: #333;
-  text-align: center;
+.container {
+  max-width: 900px; /* Aumentar el ancho máximo del contenedor */
+  width: 100%; /* Asegurarse de que el contenedor ocupe todo el ancho posible */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.7); /* Más transparencia */
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar los elementos dentro del contenedor */
 }
 
-h2 {
+h1, h2 {
   color: #333;
   text-align: center;
+  width: 100%; /* Asegura que el título ocupe todo el ancho del contenedor */
 }
 
 form {
-  background-color: #0e0000;
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo más claro para el formulario */
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  width: 100%; /* Asegurarse de que el formulario ocupe todo el ancho del contenedor */
+  max-width: 900px; /* Limitar el ancho máximo del formulario */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar los elementos dentro del formulario */
+}
+
+form label {
+  color: #333; /* Cambiar el color de los labels a negro */
+  display: block;
+  margin-bottom: 5px;
+  align-self: flex-start; /* Alinear los labels a la izquierda */
 }
 
 input, textarea {
-  width: 100%;
+  width: 100%; /* Asegurar que los inputs y textarea ocupen todo el ancho disponible */
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  background-color: #000; /* Fondo negro para los inputs */
+  color: #fff; /* Cambiar el color del texto a blanco */
+}
+
+textarea {
+  resize: none; /* Deshabilitar la redimensión del textarea */
+  height: 120px; /* Aumentar la altura del textarea */
+}
+
+input::placeholder, textarea::placeholder {
+  color: #777; /* Color gris claro para el texto placeholder */
 }
 
 button {
@@ -38,6 +78,8 @@ button {
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 4px;
+  margin-right: 10px; /* Espaciado entre los botones */
+  align-self: center; /* Alinear el botón a la izquierda */
 }
 
 button:hover {
@@ -45,9 +87,38 @@ button:hover {
 }
 
 .recipe-item {
-  background-color: #0e0000;
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo más claro para las recetas */
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+}
+
+.recipe-item h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+  width: 100%; /* Asegurarse de que el buscador ocupe todo el ancho del contenedor */
+  max-width: 900px; /* Aumentar el ancho máximo del buscador */
+}
+
+.search-bar input {
+  width: 100%; /* Ajustar el ancho del buscador para que ocupe todo el contenedor */
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #000; /* Fondo negro para el buscador */
+  color: #fff; /* Cambiar el color del texto a blanco */
+}
+
+.search-bar input::placeholder {
+  color: #777; /* Color gris claro para el texto placeholder */
+}
+
+.recipe-item p {
+  color: #333; /* Asegurar que la descripción de la receta sea visible */
 }

@@ -58,16 +58,17 @@ function App() {
   );
 
   return (
-    <div>
+    <div className="container">
       <h1>Gestor de Recetas</h1>
       <SearchBar query={query} setQuery={setQuery} />
+      <h2>Agregar una receta</h2>
       <RecipeForm 
         addRecipe={addRecipe} 
         recipes={recipes} 
         recipeToEdit={recipeToEdit} 
         updateRecipe={updateRecipe} 
       />
-      <h2>Lista de recetas</h2>
+      <h2>Lista de Recetas</h2>
       <RecipeList 
         recipes={filteredRecipes} 
         onDelete={deleteRecipe} 
