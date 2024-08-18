@@ -55,6 +55,7 @@ function App() {
         recipeToEdit={recipeToEdit} 
         updateRecipe={updateRecipe} 
       />
+      <h2>Lista de Recetas</h2>
       <RecipeList 
         recipes={filteredRecipes} 
         onDelete={deleteRecipe} 
