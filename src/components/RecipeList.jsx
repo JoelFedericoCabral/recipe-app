@@ -1,7 +1,7 @@
 import React from 'react';
 import RecipeItem from './RecipeItem';
 
-function RecipeList({ recipes, onDelete, onEdit }) {
+function RecipeList({ recipes }) {
   return (
     <div>
       {recipes.length > 0 ? (
@@ -9,8 +9,6 @@ function RecipeList({ recipes, onDelete, onEdit }) {
           <RecipeItem 
             key={recipe.name} 
             recipe={recipe} 
-            onDelete={onDelete} 
-            onEdit={onEdit} 
           />
         ))
       ) : (
