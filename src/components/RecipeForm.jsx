@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { RecipeContext } from '../context/RecipeContext';
 
 function RecipeForm() {
-  const { addRecipe, updateRecipe, recipeToEdit, setRecipeToEdit, recipes } = useContext(RecipeContext);
+  const { addRecipe, updateRecipe, recipeToEdit, setRecipeToEdit, recipes, setOriginalName } = useContext(RecipeContext);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
@@ -10,6 +10,7 @@ function RecipeForm() {
     if (recipeToEdit) {
       setName(recipeToEdit.name);
       setDescription(recipeToEdit.description);
+      setOriginalName(recipeToEdit.name); // Guardar el nombre original
     }
   }, [recipeToEdit]);
 
@@ -17,7 +18,6 @@ function RecipeForm() {
     e.preventDefault();
 
     if (recipeToEdit) {
-      // Verifica si estamos tratando de cambiar el nombre a uno que ya exista en otra receta
       if (
         recipes.some(
           (recipe) =>
@@ -30,7 +30,6 @@ function RecipeForm() {
       }
       updateRecipe({ name, description });
     } else {
-      // Verificar si ya existe una receta con el mismo nombre antes de agregarla
       if (recipes.some((recipe) => recipe.name.toLowerCase() === name.toLowerCase())) {
         alert('Ya existe una receta con ese nombre.');
         return;

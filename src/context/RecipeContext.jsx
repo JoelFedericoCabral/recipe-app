@@ -9,6 +9,7 @@ export const RecipeProvider = ({ children }) => {
   });
 
   const [recipeToEdit, setRecipeToEdit] = useState(null);
+  const [originalName, setOriginalName] = useState(''); // Estado para almacenar el nombre original
 
   useEffect(() => {
     localStorage.setItem('recipes', JSON.stringify(recipes));
@@ -21,10 +22,11 @@ export const RecipeProvider = ({ children }) => {
   const updateRecipe = (updatedRecipe) => {
     setRecipes(
       recipes.map((recipe) =>
-        recipe.name === updatedRecipe.name ? updatedRecipe : recipe
+        recipe.name === originalName ? updatedRecipe : recipe
       )
     );
     setRecipeToEdit(null); // Limpiar el estado de edición después de actualizar
+    setOriginalName(''); // Limpiar el nombre original después de la actualización
   };
 
   const deleteRecipe = (name) => {
@@ -40,6 +42,7 @@ export const RecipeProvider = ({ children }) => {
         deleteRecipe,
         recipeToEdit,
         setRecipeToEdit,
+        setOriginalName, // Pasar la función para establecer el nombre original
       }}
     >
       {children}
