@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { RecipeContext } from '../context/RecipeContext';
 
-function RecipeForm() {
+function RecipeForm({ loggedInUser }) {
   const { addRecipe, updateRecipe, recipeToEdit, setRecipeToEdit, recipes, setOriginalName } = useContext(RecipeContext);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -17,6 +17,12 @@ function RecipeForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const newRecipe = {
+      name,
+      description,
+      author: loggedInUser, // Asignar el usuario logueado como autor
+    };
+
     if (recipeToEdit) {
       if (
         recipes.some(
@@ -28,13 +34,13 @@ function RecipeForm() {
         alert('Ya existe una receta con ese nombre.');
         return;
       }
-      updateRecipe({ name, description });
+      updateRecipe(newRecipe);
     } else {
       if (recipes.some((recipe) => recipe.name.toLowerCase() === name.toLowerCase())) {
         alert('Ya existe una receta con ese nombre.');
         return;
       }
-      addRecipe({ name, description });
+      addRecipe(newRecipe);
     }
 
     setName('');

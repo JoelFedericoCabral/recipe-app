@@ -1,7 +1,7 @@
 import React from 'react';
 import RecipeItem from './RecipeItem';
 
-function RecipeList({ recipes }) {
+function RecipeList({ recipes, loggedInUser }) {
   return (
     <div>
       {recipes.length > 0 ? (
@@ -9,6 +9,7 @@ function RecipeList({ recipes }) {
           <RecipeItem 
             key={recipe.name} 
             recipe={recipe} 
+            loggedInUser={loggedInUser} 
           />
         ))
       ) : (

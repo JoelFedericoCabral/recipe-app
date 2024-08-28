@@ -1,10 +1,11 @@
 import './App.css';
 import React, { useState, useEffect, useContext } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import RecipeForm from './components/RecipeForm';
 import RecipeList from './components/RecipeList';
 import SearchBar from './components/SearchBar';
 import RegisterForm from './components/RegisterForm';
+import LoginForm from './components/LoginForm'; // Nuevo import
 import Navbar from './components/Navbar';
 import { RecipeContext } from './context/RecipeContext'; 
 
@@ -38,27 +39,33 @@ function App() {
           <h1>Gestor de Recetas</h1>
           <Routes>
             <Route 
+              path="/register" 
+              element={!loggedInUser ? <RegisterForm /> : <Navigate to="/" />}
+            />
+            <Route 
+              path="/login" 
+              element={!loggedInUser ? <LoginForm setLoggedInUser={setLoggedInUser} /> : <Navigate to="/" />}
+            />
+            <Route 
               path="/" 
               element={
-                !loggedInUser ? (
-                  <>
-                    <h2>Registro de Usuarios</h2>
-                    <RegisterForm />
-                    <h2>Lista de Recetas</h2>
-                    <RecipeList recipes={filteredRecipes} />
-                  </>
-                ) : (
+                loggedInUser ? (
                   <>
                     <SearchBar query={query} setQuery={setQuery} />
                     <h2>Agregar una receta</h2>
-                    <RecipeForm />
+                    <RecipeForm loggedInUser={loggedInUser} />
                     <h2>Lista de Recetas</h2>
-                    <RecipeList recipes={filteredRecipes} />
+                    <RecipeList recipes={filteredRecipes} loggedInUser={loggedInUser} />
+                  </>
+                ) : (
+                  <>
+                    <h2>Lista de Recetas</h2>
+                    <RecipeList recipes={filteredRecipes} loggedInUser={loggedInUser} />
+                    <Navigate to="/login" />
                   </>
                 )
               } 
             />
-            {/* Agregar rutas adicionales aquí si es necesario */}
           </Routes>
         </div>
       </div>
