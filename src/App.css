@@ -139,10 +139,12 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed; /* Navbar fijo en la parte superior */
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000; /* Asegura que el navbar esté sobre otros elementos */
+  right: 0; /* Asegura que el navbar ocupe todo el ancho */
+  z-index: 1000;
+  box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
 }
 
 .navbar-logo {
@@ -158,8 +160,9 @@ button:hover {
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 10px; /* Reducir el espacio entre los elementos para ahorrar espacio */
   margin: 0;
+  padding: 0;
 }
 
 .navbar-links li {
@@ -170,7 +173,7 @@ button:hover {
   color: #fff;
   text-decoration: none;
   font-size: 16px;
-  padding: 10px 15px;
+  padding: 10px 12px; /* Ajuste de padding para evitar que se corte en pantallas pequeñas */
   border-radius: 5px;
   background-color: #444;
   border: none;
@@ -178,7 +181,7 @@ button:hover {
 }
 
 .navbar-links a:hover, .navbar-links button:hover {
-  background-color: #555;
+  background-color: #9bce83;
 }
 
 .navbar-links button {
