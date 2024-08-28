@@ -157,6 +157,10 @@ button:hover {
   text-decoration: none;
 }
 
+.navbar-logo a:hover {
+  color: #218838;
+}
+
 .navbar-links {
   list-style: none;
   display: flex;
