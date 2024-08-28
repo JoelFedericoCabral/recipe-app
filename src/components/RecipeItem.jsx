@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { RecipeContext } from '../context/RecipeContext';
 
 function RecipeItem({ recipe, loggedInUser }) {
   const { deleteRecipe, setRecipeToEdit } = useContext(RecipeContext);
 
-  const canEdit = recipe.author === loggedInUser;
-
   return (
     <div className="recipe-item">
-      <h3>{recipe.name}</h3>
+      <h3><Link to={`/recipes/${recipe.name}`}>{recipe.name}</Link></h3> {/* Enlace a detalles */}
       <p>{recipe.description}</p>
-      {canEdit && (
+      {loggedInUser && (
         <>
           <button onClick={() => deleteRecipe(recipe.name)}>Eliminar</button>
           <button onClick={() => setRecipeToEdit(recipe)}>Editar</button>

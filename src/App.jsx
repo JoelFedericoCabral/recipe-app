@@ -9,6 +9,7 @@ import SearchBar from './components/SearchBar';
 import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
+import RecipeDetails from './components/RecipeDetails'; // Importar el componente de detalles
 import ProtectedRoute from './components/ProtectedRoute';
 import { RecipeContext } from './context/RecipeContext'; 
 
@@ -64,6 +65,10 @@ function App() {
                   }
                 />
               }
+            />
+            <Route 
+              path="/recipes/:recipeName" 
+              element={<RecipeDetails />} 
             />
           </Routes>
         </div>
