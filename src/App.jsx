@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import RecipeForm from './components/RecipeForm';
 import RecipeList from './components/RecipeList';
 import SearchBar from './components/SearchBar';
@@ -13,6 +13,12 @@ function App() {
   const filteredRecipes = recipes.filter((recipe) =>
     recipe.name.toLowerCase().includes(query.toLowerCase())
   );
+
+  // Limpiar la barra de búsqueda cuando se actualizan las recetas
+  useEffect(() => {
+    setQuery(''); // Limpiar la barra de búsqueda
+  }, [recipes]);
+
 
   return (
     <div className="container">
