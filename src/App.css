@@ -163,7 +163,9 @@ button:hover {
   gap: 10px; /* Reducir el espacio entre los elementos para ahorrar espacio */
   margin: 0;
   padding: 0;
+  align-items: center;
 }
+
 
 .navbar-links li {
   display: inline;
@@ -182,6 +184,7 @@ button:hover {
 
 .navbar-links a:hover, .navbar-links button:hover {
   background-color: #218838;
+  color: black;
 }
 
 .navbar-links button {
