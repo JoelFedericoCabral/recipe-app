@@ -157,6 +157,14 @@ button:hover {
   text-decoration: none;
 }
 
+/* Centrando el mensaje de bienvenida */
+.navbar-center {
+  color: #218838;
+  font-size: 18px;
+  flex-grow: 1;
+  text-align: center;
+}
+
 .navbar-logo a:hover {
   color: #218838;
 }
