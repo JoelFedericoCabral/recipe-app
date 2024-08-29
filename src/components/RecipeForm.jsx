@@ -7,10 +7,21 @@ function RecipeForm({ loggedInUser }) {
   const [description, setDescription] = useState('');
 
   useEffect(() => {
+    // Limpia los campos cuando se monta el componente
+    setName('');
+    setDescription('');
+    setRecipeToEdit(null);
+  }, []);
+
+  useEffect(() => {
     if (recipeToEdit) {
       setName(recipeToEdit.name);
       setDescription(recipeToEdit.description);
       setOriginalName(recipeToEdit.name); // Guardar el nombre original
+    } else {
+      // Limpia los campos cuando no haya una receta para editar
+      setName('');
+      setDescription('');
     }
   }, [recipeToEdit]);
 

@@ -194,3 +194,8 @@ button:hover {
 .navbar-links button {
   background-color: transparent;
 }
+
+
+.recipe-details p {
+  color: black;
+}
