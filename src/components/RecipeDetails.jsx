@@ -1,49 +1,41 @@
 import React, { useContext } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { RecipeContext } from '../context/RecipeContext';
 
-/**
- * Componente que muestra los detalles de una receta específica y permite editar o eliminar si es del usuario logueado
- * 
- * @returns {JSX.Element} - Vista de detalles de la receta
- */
-function RecipeDetails() {
+function RecipeDetails({ loggedInUser }) {
   const { recipes, deleteRecipe, setRecipeToEdit } = useContext(RecipeContext);
-  const { recipeName } = useParams();
+  const { name } = useParams();
   const navigate = useNavigate();
 
-  // Buscar la receta específica por nombre
-  const recipe = recipes.find(recipe => recipe.name === recipeName);
-  const loggedInUser = sessionStorage.getItem('loggedInUser'); // Obtener el usuario logueado
+  const recipe = recipes.find((r) => r.name === name);
 
   if (!recipe) {
     return <p>Receta no encontrada.</p>;
   }
 
   const handleDelete = () => {
-    deleteRecipe(recipe.name);
-    navigate('/'); // Redirigir a la lista de recetas después de eliminar
+    deleteRecipe(name);
+    navigate('/'); // Navegar de vuelta a la lista de recetas después de eliminar
   };
 
   const handleEdit = () => {
     setRecipeToEdit(recipe);
-    navigate('/'); // Redirigir al formulario de edición
+    navigate('/'); // Navegar al formulario de edición
   };
 
   return (
     <div className="recipe-details">
       <h2>{recipe.name}</h2>
       <p>{recipe.description}</p>
-
-      {/* Mostrar botones de editar y eliminar si el usuario es el creador */}
-      {loggedInUser === recipe.author && (
+      {recipe.author === loggedInUser && (
         <div>
-          <button onClick={handleDelete}>Eliminar</button>
           <button onClick={handleEdit}>Editar</button>
+          <button onClick={handleDelete}>Eliminar</button>
         </div>
       )}
-      
-      <Link to="/">Volver a la lista de recetas</Link>
+      <p>
+        <a href="/" onClick={() => navigate(-1)}>Volver a la lista de recetas</a>
+      </p>
     </div>
   );
 }
