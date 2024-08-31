@@ -1,10 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { RecipeContext } from '../context/RecipeContext';
 
 function Navbar({ loggedInUser, handleLogout }) {
+  const { setRecipeToEdit } = useContext(RecipeContext);
+  const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    setRecipeToEdit(null); // Limpiar el estado de edición
+    navigate('/'); // Navegar al inicio
+  };
+
   return (
     <nav className="navbar">
-      <div className="navbar-logo">
+      <div className="navbar-logo" onClick={handleLogoClick}>
         <Link to="/">Gestor de Recetas</Link>
       </div>
       <div className="navbar-user">

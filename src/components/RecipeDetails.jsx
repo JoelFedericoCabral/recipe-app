@@ -3,11 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { RecipeContext } from '../context/RecipeContext';
 
 function RecipeDetails({ loggedInUser }) {
-  const { recipes, deleteRecipe, setRecipeToEdit, setOriginalId } = useContext(RecipeContext); // Agregar setOriginalId
-  const { id } = useParams(); // Usar id en lugar de name
+  const { recipes, deleteRecipe, setRecipeToEdit, setOriginalId } = useContext(RecipeContext);
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const recipe = recipes.find((r) => r.id === id); // Buscar por id
+  const recipe = recipes.find((r) => r.id === id);
 
   if (!recipe) {
     return <p>Receta no encontrada.</p>;
@@ -20,8 +20,8 @@ function RecipeDetails({ loggedInUser }) {
 
   const handleEdit = () => {
     setRecipeToEdit(recipe);
-    setOriginalId(id); // Asegurarse de establecer el ID original
-    navigate(`/edit-recipe/${id}`); // Navegar a la página de edición con el ID
+    setOriginalId(id);
+    navigate(`/edit-recipe/${id}`); 
   };
 
   return (
@@ -29,13 +29,13 @@ function RecipeDetails({ loggedInUser }) {
       <h2>{recipe.name}</h2>
       <p>{recipe.description}</p>
       <h3>Ingredientes:</h3>
-      <p>{recipe.ingredients}</p> {/* Mostrar los ingredientes */}
+      <p>{recipe.ingredients}</p>
       <div>
         <button onClick={handleEdit}>Editar</button>
-        <button onClick={handleDelete}>Eliminar</button> {/* Botón para eliminar la receta */}
+        <button onClick={handleDelete}>Eliminar</button>
       </div>
       <p>
-        <a href="/" onClick={() => navigate(-1)}>Volver a la lista de recetas</a>
+        <a href="/" onClick={(e) => { e.preventDefault(); navigate(-1); }}>Volver a la lista de recetas</a>
       </p>
     </div>
   );
