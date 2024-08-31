@@ -8,6 +8,8 @@ import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
 import RecipeDetails from './components/RecipeDetails';
+import Favorites from './components/Favorites';  // Importamos el componente de Favoritos
+import MyRecipes from './components/MyRecipes';  // Importamos el componente de Mis Recetas
 import { RecipeContext } from './context/RecipeContext';
 
 function App() {
@@ -27,7 +29,6 @@ function App() {
     setLoggedInUser(null);
   };
 
-  // Filtrar las recetas según la consulta de búsqueda
   const filteredRecipes = recipes.filter((recipe) =>
     recipe.name.toLowerCase().includes(query.toLowerCase())
   );
@@ -70,6 +71,14 @@ function App() {
             <Route
               path="/recipes/:name"
               element={<RecipeDetails loggedInUser={loggedInUser} />}
+            />
+            <Route
+              path="/favorites"
+              element={<Favorites />}
+            />
+            <Route
+              path="/my-recipes"
+              element={<MyRecipes />}
             />
           </Routes>
         </div>

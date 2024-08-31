@@ -15,14 +15,12 @@ export const RecipeProvider = ({ children }) => {
     localStorage.setItem('recipes', JSON.stringify(recipes));
   }, [recipes]);
 
-
   // Agregar una nueva receta
   const addRecipe = (recipe) => {
     setRecipes([...recipes, recipe]);
   };
 
-
-   // Actualizar una receta existente
+  // Actualizar una receta existente
   const updateRecipe = (updatedRecipe) => {
     setRecipes(
       recipes.map((recipe) =>
@@ -33,10 +31,18 @@ export const RecipeProvider = ({ children }) => {
     setOriginalName(''); // Limpiar el nombre original después de la actualización
   };
 
-
   // Eliminar una receta por nombre
   const deleteRecipe = (name) => {
     setRecipes(recipes.filter((recipe) => recipe.name !== name));
+  };
+
+  // Alternar el estado de favorito de una receta
+  const toggleFavorite = (name) => {
+    setRecipes(
+      recipes.map((recipe) =>
+        recipe.name === name ? { ...recipe, favorite: !recipe.favorite } : recipe
+      )
+    );
   };
 
   return (
@@ -46,6 +52,7 @@ export const RecipeProvider = ({ children }) => {
         addRecipe,
         updateRecipe,
         deleteRecipe,
+        toggleFavorite, // Incluyendo la función de favoritos en el contexto
         recipeToEdit,
         setRecipeToEdit,
         setOriginalName, // Pasar la función para establecer el nombre original

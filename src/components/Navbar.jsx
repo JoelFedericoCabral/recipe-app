@@ -7,16 +7,13 @@ function Navbar({ loggedInUser, handleLogout }) {
       <div className="navbar-logo">
         <Link to="/">Gestor de Recetas</Link>
       </div>
-      
-      {/* Centrar el mensaje de bienvenida */}
-      {loggedInUser && (
-        <div className="navbar-center">
-          Bienvenido, {loggedInUser}!
-        </div>
-      )}
-      
+      <div className="navbar-user">
+        {loggedInUser ? (
+          <span>Bienvenido, {loggedInUser}!</span>
+        ) : null}
+      </div>
       <ul className="navbar-links">
-        {!loggedInUser ? (
+        {!loggedInUser && (
           <>
             <li>
               <Link to="/login">Iniciar Sesión</Link>
@@ -25,16 +22,14 @@ function Navbar({ loggedInUser, handleLogout }) {
               <Link to="/register">Registrarse</Link>
             </li>
           </>
-        ) : (
+        )}
+        {loggedInUser && (
           <>
             <li>
               <Link to="/favorites">Favoritos</Link>
             </li>
             <li>
               <Link to="/my-recipes">Mis Recetas</Link>
-            </li>
-            <li>
-              <Link to="/all-recipes">Todas las Recetas</Link>
             </li>
             <li>
               <button onClick={handleLogout}>Cerrar Sesión</button>
