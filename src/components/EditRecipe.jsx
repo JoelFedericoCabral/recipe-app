@@ -3,27 +3,27 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { RecipeContext } from '../context/RecipeContext';
 
 function EditRecipe() {
-  const { recipes, updateRecipe, setOriginalName } = useContext(RecipeContext);
+  const { recipes, updateRecipe, setOriginalId } = useContext(RecipeContext);
   const navigate = useNavigate();
-  const { name: recipeName } = useParams();
+  const { id } = useParams(); // Obtener el ID de la receta desde los parámetros
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [ingredients, setIngredients] = useState('');
 
   useEffect(() => {
-    const recipe = recipes.find((r) => r.name === recipeName);
+    const recipe = recipes.find((r) => r.id === id);
     if (recipe) {
       setName(recipe.name);
       setDescription(recipe.description);
       setIngredients(recipe.ingredients || '');
-      setOriginalName(recipe.name);
+      setOriginalId(id); // Establecer el ID original
     }
-  }, [recipeName, recipes, setOriginalName]);
+  }, [id, recipes, setOriginalId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateRecipe({ name, description, ingredients });
+    updateRecipe({ id, name, description, ingredients }); // Pasar el ID con los datos actualizados
     navigate('/'); // Redirigir a la lista de recetas después de actualizar
   };
 

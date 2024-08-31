@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid'; // Añadir una dependencia para generar IDs únicos
 
 export const RecipeContext = createContext();
 
@@ -9,38 +10,38 @@ export const RecipeProvider = ({ children }) => {
   });
 
   const [recipeToEdit, setRecipeToEdit] = useState(null);
-  const [originalName, setOriginalName] = useState(''); // Estado para almacenar el nombre original
+  const [originalId, setOriginalId] = useState(''); // Cambiamos a originalId en lugar de originalName
 
   useEffect(() => {
     localStorage.setItem('recipes', JSON.stringify(recipes));
   }, [recipes]);
 
-  // Agregar una nueva receta
+  // Agregar una nueva receta con un ID único
   const addRecipe = (recipe) => {
-    setRecipes([...recipes, recipe]);
+    const newRecipe = { ...recipe, id: uuidv4() }; // Generar un ID único para cada receta
+    setRecipes([...recipes, newRecipe]);
   };
 
-  // Actualizar una receta existente
+  // Actualizar una receta existente usando su ID
   const updateRecipe = (updatedRecipe) => {
     setRecipes(
       recipes.map((recipe) =>
-        recipe.name === originalName ? updatedRecipe : recipe
+        recipe.id === originalId ? updatedRecipe : recipe
       )
     );
-    setRecipeToEdit(null); // Limpiar el estado de edición después de actualizar
-    setOriginalName(''); // Limpiar el nombre original después de la actualización
+    setRecipeToEdit(null);
+    setOriginalId('');
   };
 
-  // Eliminar una receta por nombre
-  const deleteRecipe = (name) => {
-    setRecipes(recipes.filter((recipe) => recipe.name !== name));
+  // Eliminar una receta por ID
+  const deleteRecipe = (id) => {
+    setRecipes(recipes.filter((recipe) => recipe.id !== id));
   };
 
-  // Alternar el estado de favorito de una receta
-  const toggleFavorite = (name) => {
+  const toggleFavorite = (id) => {
     setRecipes(
       recipes.map((recipe) =>
-        recipe.name === name ? { ...recipe, favorite: !recipe.favorite } : recipe
+        recipe.id === id ? { ...recipe, favorite: !recipe.favorite } : recipe
       )
     );
   };
@@ -52,10 +53,10 @@ export const RecipeProvider = ({ children }) => {
         addRecipe,
         updateRecipe,
         deleteRecipe,
-        toggleFavorite, // Incluyendo la función de favoritos en el contexto
+        toggleFavorite,
         recipeToEdit,
         setRecipeToEdit,
-        setOriginalName, // Pasar la función para establecer el nombre original
+        setOriginalId, // Pasar la función para establecer el ID original
       }}
     >
       {children}

@@ -8,8 +8,9 @@ import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
 import RecipeDetails from './components/RecipeDetails';
-import Favorites from './components/Favorites';  // Importamos el componente de Favoritos
-import MyRecipes from './components/MyRecipes';  // Importamos el componente de Mis Recetas
+import Favorites from './components/Favorites'; 
+import MyRecipes from './components/MyRecipes'; 
+import EditRecipe from './components/EditRecipe'; // Importa el componente de edición
 import { RecipeContext } from './context/RecipeContext';
 
 function App() {
@@ -57,7 +58,7 @@ function App() {
                     <h2>Agregar una receta</h2>
                     <RecipeForm loggedInUser={loggedInUser} />
                     <h2>Lista de Recetas</h2>
-                    <RecipeList recipes={filteredRecipes} />
+                    <RecipeList recipes={filteredRecipes} loggedInUser={loggedInUser} />
                   </>
                 ) : (
                   <>
@@ -69,8 +70,12 @@ function App() {
               }
             />
             <Route
-              path="/recipes/:name"
+              path="/recipes/:id" // Cambiar a usar id
               element={<RecipeDetails loggedInUser={loggedInUser} />}
+            />
+            <Route
+              path="/edit-recipe/:id" // Asegúrate de que esta ruta reciba el ID
+              element={<EditRecipe />}
             />
             <Route
               path="/favorites"
