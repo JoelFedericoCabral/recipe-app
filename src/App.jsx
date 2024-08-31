@@ -38,8 +38,9 @@ function App() {
     <Router>
       <div>
         <Navbar loggedInUser={loggedInUser} handleLogout={handleLogout} />
+        
         <div className="container">
-          <h1>Gestor de Recetas</h1>
+          
           <Routes>
             <Route
               path="/register"

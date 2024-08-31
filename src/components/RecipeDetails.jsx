@@ -30,12 +30,12 @@ function RecipeDetails({ loggedInUser }) {
       <p>{recipe.description}</p>
       <h3>Ingredientes:</h3>
       <p>{recipe.ingredients}</p>
-      <div>
+      <div className='button-group'>
         <button onClick={handleEdit}>Editar</button>
         <button onClick={handleDelete}>Eliminar</button>
       </div>
       <p>
-        <a href="/" onClick={(e) => { e.preventDefault(); navigate(-1); }}>Volver a la lista de recetas</a>
+        <a href="/" onClick={(e) => { e.preventDefault(); navigate(-1); }}>Volver</a>
       </p>
     </div>
   );
