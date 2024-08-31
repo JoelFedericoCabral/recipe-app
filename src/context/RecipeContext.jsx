@@ -15,10 +15,14 @@ export const RecipeProvider = ({ children }) => {
     localStorage.setItem('recipes', JSON.stringify(recipes));
   }, [recipes]);
 
+
+  // Agregar una nueva receta
   const addRecipe = (recipe) => {
     setRecipes([...recipes, recipe]);
   };
 
+
+   // Actualizar una receta existente
   const updateRecipe = (updatedRecipe) => {
     setRecipes(
       recipes.map((recipe) =>
@@ -29,6 +33,8 @@ export const RecipeProvider = ({ children }) => {
     setOriginalName(''); // Limpiar el nombre original después de la actualización
   };
 
+
+  // Eliminar una receta por nombre
   const deleteRecipe = (name) => {
     setRecipes(recipes.filter((recipe) => recipe.name !== name));
   };

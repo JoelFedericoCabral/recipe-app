@@ -15,18 +15,20 @@ function RecipeDetails({ loggedInUser }) {
 
   const handleDelete = () => {
     deleteRecipe(name);
-    navigate('/'); // Navegar de vuelta a la lista de recetas después de eliminar
+    navigate('/'); 
   };
 
   const handleEdit = () => {
     setRecipeToEdit(recipe);
-    navigate('/'); // Navegar al formulario de edición
+    navigate('/'); 
   };
 
   return (
     <div className="recipe-details">
       <h2>{recipe.name}</h2>
       <p>{recipe.description}</p>
+      <h3>Ingredientes:</h3>
+      <p>{recipe.ingredients}</p> {/* Mostrar los ingredientes */}
       {recipe.author === loggedInUser && (
         <div>
           <button onClick={handleEdit}>Editar</button>

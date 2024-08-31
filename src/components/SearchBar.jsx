@@ -14,4 +14,3 @@ function SearchBar({ query, setQuery }) {
 }
 
 export default SearchBar;
-

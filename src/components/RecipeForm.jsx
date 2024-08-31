@@ -5,15 +5,18 @@ function RecipeForm({ loggedInUser }) {
   const { addRecipe, updateRecipe, recipeToEdit, setRecipeToEdit, recipes, setOriginalName } = useContext(RecipeContext);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [ingredients, setIngredients] = useState(''); // Estado para ingredientes
 
   useEffect(() => {
     if (recipeToEdit) {
       setName(recipeToEdit.name);
       setDescription(recipeToEdit.description);
-      setOriginalName(recipeToEdit.name); // Guardar el nombre original
+      setIngredients(recipeToEdit.ingredients || ''); // Cargar los ingredientes al editar
+      setOriginalName(recipeToEdit.name);
     } else {
       setName('');
       setDescription('');
+      setIngredients(''); // Limpiar ingredientes cuando no se está editando
     }
   }, [recipeToEdit]);
 
@@ -23,7 +26,8 @@ function RecipeForm({ loggedInUser }) {
     const newRecipe = {
       name,
       description,
-      author: loggedInUser, // Asignar el usuario logueado como autor
+      ingredients, // Añadir ingredientes al objeto de la receta
+      author: loggedInUser, 
     };
 
     if (recipeToEdit) {
@@ -46,8 +50,10 @@ function RecipeForm({ loggedInUser }) {
       addRecipe(newRecipe);
     }
 
+    // Limpiar el formulario después de agregar o editar
     setName('');
     setDescription('');
+    setIngredients('');
     setRecipeToEdit(null);
   };
 
@@ -69,6 +75,15 @@ function RecipeForm({ loggedInUser }) {
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          required
+        ></textarea>
+      </div>
+      <div>
+        <label htmlFor="ingredients">Ingredientes:</label>
+        <textarea
+          id="ingredients"
+          value={ingredients}
+          onChange={(e) => setIngredients(e.target.value)}
           required
         ></textarea>
       </div>
