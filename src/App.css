@@ -11,20 +11,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Para centrar verticalmente */
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1200px; /* Aumentamos el ancho máximo del contenedor */
   width: 100%;
-  padding: 20px;
-  margin: 80px 20px 20px 20px; /* Agregamos un margen superior para evitar la superposición */
+  padding: 40px;
+  margin: 80px auto 20px auto;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
 }
 
 
@@ -36,16 +37,12 @@ h1, h2, h3 {
   color: #333;
   text-align: left;
   width: 100%;
+  font-size: 2em;
 }
 
 form {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
   width: 100%;
-  max-width: 900px;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,6 +57,7 @@ form label {
 
 input, textarea {
   width: 100%;
+  max-width: 300px;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
@@ -71,6 +69,7 @@ input, textarea {
 textarea {
   resize: none;
   height: 120px;
+  
 }
 
 input::placeholder, textarea::placeholder {
@@ -99,50 +98,54 @@ button:hover {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Asegura que los elementos dentro estén centrados */
+  text-align: center;
 }
 
 .recipe-item h3 {
   margin-top: 0;
   color: #333;
+  word-wrap: break-word; /* Asegura que el texto no se desborde del contenedor */
+}
+
+.recipe-item p {
+  color: #333;
+  word-wrap: break-word; /* Asegura que el texto no se desborde del contenedor */
 }
 
 .search-bar {
   margin-bottom: 20px;
   width: 100%;
-  padding: 0; /* Asegurarse de que no haya padding que afecte el ancho */
-  max-width: 900px;
+  padding: 0;
+  max-width: 600px;
   display: flex;
-  justify-content: center; /* Centrar el input dentro del contenedor */
+  justify-content: center;
 }
 
 .search-bar input {
-  width: 100%; /* Ocupar todo el ancho del contenedor */
-  padding: 15px; /* Padding uniforme */
-  border-radius: 30px; /* Bordes redondeados */
+  width: 100%;
+  padding: 15px;
+  border-radius: 30px;
   border: 1px solid #ddd;
   background-color: #000;
   color: #fff;
   font-size: 18px;
   text-align: center;
-  box-sizing: border-box; /* Incluir padding y borde en el cálculo del ancho */
-  max-width: 100%; /* Asegurarse de que el input ocupe todo el ancho disponible */
+  box-sizing: border-box;
 }
 
 .search-bar input::placeholder {
   color: #777;
 }
 
-.recipe-item p {
-  color: #333;
-}
-
-
 .navbar {
   width: 100%;
   background-color: transparent;
   backdrop-filter: blur(10px);
   border: 2px solid #218838;
-  padding: 10px 20px;
+  padding: 10px 40px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
@@ -150,9 +153,9 @@ button:hover {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0; /* Asegura que el navbar ocupe todo el ancho */
+  right: 0;
   z-index: 1000;
-  box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+  box-sizing: border-box;
 }
 
 .navbar-logo {
@@ -165,7 +168,14 @@ button:hover {
   text-decoration: none;
 }
 
-/* Centrando el mensaje de bienvenida */
+
+.navbar-user span {
+  font-size: 20px;
+  font-weight: bold;
+  color: #218838;
+
+}
+
 .navbar-center {
   color: #218838;
   font-size: 18px;
@@ -180,12 +190,11 @@ button:hover {
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: 10px; /* Reducir el espacio entre los elementos para ahorrar espacio */
+  gap: 10px;
   margin: 0;
   padding: 0;
   align-items: center;
 }
-
 
 .navbar-links li {
   display: inline;
@@ -196,7 +205,7 @@ button:hover {
   text-decoration: none;
   font-size: 16px;
   font-weight: bold;
-  padding: 10px 12px; /* Ajuste de padding para evitar que se corte en pantallas pequeñas */
+  padding: 10px 12px;
   border-radius: 5px;
   background-color: transparent;
   backdrop-filter: blur(10px);
@@ -213,33 +222,26 @@ button:hover {
   background-color: transparent;
 }
 
-
 .recipe-details {
-  display: flex; /* Cambia el display a flex */
-  flex-direction: column; /* Asegúrate de que los elementos se coloquen en una columna */
-  justify-content: center; /* Centra los elementos verticalmente */
-  align-items: center; /* Centra los elementos horizontalmente */
-  width: 500px;
-  height: 500px;
-  margin: 0 auto; /* Esto asegura que el contenedor esté centrado dentro de su contenedor padre */
-  padding: 20px; /* Opcional: Añade un poco de padding si quieres espacio alrededor del contenido */
-  background-color: rgba(255, 255, 255, 0.8); /* Opcional: Añadir un fondo */
-  border-radius: 10px; /* Opcional: Bordes redondeados */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
 }
-
-
 
 .recipe-details p, h2, h3 {
   color: black;
   text-align: center;
 }
 
-
 .button-group {
   display: flex;
-  justify-content: center; /* Esto centrará horizontalmente los botones */
-  gap: 10px; /* Opcional: añade un espacio entre los botones */
-  margin-top: 20px; /* Opcional: ajusta el margen superior si es necesario */
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
-
-
