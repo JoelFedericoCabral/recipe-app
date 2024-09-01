@@ -45,7 +45,10 @@ function Navbar({ loggedInUser, handleLogout }) {
                   </li>
                   <li>
                     <button
-                      onClick={handleLogout}
+                      onClick={() => {
+                        handleLogout();
+                        navigate('/login'); // Redirigir después de cerrar sesión
+                      }}
                       className="text-gray-600 hover:text-green-600 focus:outline-none"
                     >
                       Cerrar Sesión
