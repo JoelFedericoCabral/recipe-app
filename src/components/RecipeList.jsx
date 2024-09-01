@@ -3,7 +3,7 @@ import RecipeItem from './RecipeItem';
 
 function RecipeList({ recipes, loggedInUser }) {
   return (
-    <div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
       {recipes.length > 0 ? (
         recipes.map((recipe) => (
           <RecipeItem 
@@ -13,7 +13,7 @@ function RecipeList({ recipes, loggedInUser }) {
           />
         ))
       ) : (
-        <p>No hay recetas aún.</p>
+        <p className="col-span-full text-center text-xl text-gray-500">No hay recetas aún.</p>
       )}
     </div>
   );

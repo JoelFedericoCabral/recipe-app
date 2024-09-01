@@ -13,7 +13,7 @@ function Favorites({ loggedInUser }) {
 
   // Verificar que el usuario esté logueado
   if (!loggedInUser) {
-    return <p>Debe estar logueado para ver sus favoritos.</p>;
+    return <p className="text-red-500 text-center mt-5">Debe estar logueado para ver sus favoritos.</p>;
   }
 
   // Obtener las recetas favoritas del usuario logueado
@@ -21,12 +21,12 @@ function Favorites({ loggedInUser }) {
   const favoriteRecipes = recipes.filter(recipe => userFavorites.includes(recipe.id));
 
   return (
-    <div>
-      <h2>Mis Favoritos</h2>
+    <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+      <h2 className="text-3xl font-bold mb-5 text-center text-green-600">Mis Favoritos</h2>
       {favoriteRecipes.length > 0 ? (
         <RecipeList recipes={favoriteRecipes} loggedInUser={loggedInUser} />
       ) : (
-        <p>No tienes recetas favoritas aún.</p>
+        <p className="text-gray-500 text-center">No tienes recetas favoritas aún.</p>
       )}
     </div>
   );

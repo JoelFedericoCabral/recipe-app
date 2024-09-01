@@ -54,14 +54,14 @@ function App() {
                 loggedInUser ? (
                   <>
                     <SearchBar query={query} setQuery={setQuery} />
-                    <h2>Agregar una receta</h2>
+                    <h2 className="text-2xl font-bold mt-4">Agregar una receta</h2>
                     <RecipeForm loggedInUser={loggedInUser} />
-                    <h2>Lista de Recetas</h2>
+                    <h2 className="text-2xl font-bold mt-4">Lista de Recetas</h2>
                     <RecipeList recipes={filteredRecipes} loggedInUser={loggedInUser} />
                   </>
                 ) : (
                   <>
-                    <h2>Lista de Recetas</h2>
+                    <h2 className="text-2xl font-bold mt-4">Lista de Recetas</h2>
                     <RecipeList recipes={filteredRecipes} />
                     <Navigate to="/login" />
                   </>

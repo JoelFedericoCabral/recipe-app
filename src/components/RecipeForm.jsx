@@ -5,18 +5,18 @@ function RecipeForm({ loggedInUser }) {
   const { addRecipe, updateRecipe, recipeToEdit, setRecipeToEdit, recipes, setOriginalName } = useContext(RecipeContext);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [ingredients, setIngredients] = useState(''); // Estado para ingredientes
+  const [ingredients, setIngredients] = useState('');
 
   useEffect(() => {
     if (recipeToEdit) {
       setName(recipeToEdit.name);
       setDescription(recipeToEdit.description);
-      setIngredients(recipeToEdit.ingredients || ''); // Cargar los ingredientes al editar
+      setIngredients(recipeToEdit.ingredients || '');
       setOriginalName(recipeToEdit.name);
     } else {
       setName('');
       setDescription('');
-      setIngredients(''); // Limpiar ingredientes cuando no se está editando
+      setIngredients('');
     }
   }, [recipeToEdit]);
 
@@ -26,8 +26,8 @@ function RecipeForm({ loggedInUser }) {
     const newRecipe = {
       name,
       description,
-      ingredients, // Añadir ingredientes al objeto de la receta
-      author: loggedInUser, 
+      ingredients,
+      author: loggedInUser,  // Aseguramos que el author se asigna correctamente
     };
 
     if (recipeToEdit) {
@@ -58,36 +58,41 @@ function RecipeForm({ loggedInUser }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Nombre de la Receta:</label>
+    <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
+      <div className="mb-4">
+        <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Nombre de la Receta:</label>
         <input
           id="name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
-      <div>
-        <label htmlFor="description">Descripción:</label>
+      <div className="mb-4">
+        <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">Descripción:</label>
         <textarea
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         ></textarea>
       </div>
-      <div>
-        <label htmlFor="ingredients">Ingredientes:</label>
+      <div className="mb-4">
+        <label htmlFor="ingredients" className="block text-gray-700 text-sm font-bold mb-2">Ingredientes:</label>
         <textarea
           id="ingredients"
           value={ingredients}
           onChange={(e) => setIngredients(e.target.value)}
           required
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         ></textarea>
       </div>
-      <button type="submit">{recipeToEdit ? 'Actualizar Receta' : 'Agregar Receta'}</button>
+      <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        {recipeToEdit ? 'Actualizar Receta' : 'Agregar Receta'}
+      </button>
     </form>
   );
 }

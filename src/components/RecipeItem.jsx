@@ -8,16 +8,24 @@ function RecipeItem({ recipe, loggedInUser }) {
   const isFavorite = favorites[loggedInUser]?.includes(recipe.id);
 
   return (
-    <div className="recipe-item">
-      <h3>
-        <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+    <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center text-center mb-4">
+      <h3 className="text-xl font-semibold text-gray-800 mb-2">
+        <Link to={`/recipes/${recipe.id}`} className="hover:underline">{recipe.name}</Link>
       </h3>
-      <p>{recipe.description}</p>
-      <div>
-        <button onClick={() => toggleFavorite(loggedInUser, recipe.id)}>
+      <p className="text-gray-600 mb-4">{recipe.description}</p>
+      <div className="flex space-x-4">
+        <button 
+          onClick={() => toggleFavorite(loggedInUser, recipe.id)}
+          className={`focus:outline-none ${isFavorite ? 'text-red-500' : 'text-gray-400'}`}
+        >
           {isFavorite ? '❤️' : '🤍'}
         </button>
-        <button onClick={() => deleteRecipe(recipe.id)}>Eliminar</button>
+        <button 
+          onClick={() => deleteRecipe(recipe.id)}
+          className="text-red-500 hover:underline"
+        >
+          Eliminar
+        </button>
       </div>
     </div>
   );
