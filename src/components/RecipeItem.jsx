@@ -22,7 +22,7 @@ function RecipeItem({ recipe, loggedInUser }) {
         </button>
         <button 
           onClick={() => deleteRecipe(recipe.id)}
-          className="text-red-500 hover:underline"
+          className="text-red-500 hover:bg-red-500 hover:text-white hover:underline px-4 py-2 border border-red-500 rounded shadow hover:shadow-lg transform hover:scale-105 transition duration-200"
         >
           Eliminar
         </button>
