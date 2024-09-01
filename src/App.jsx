@@ -10,7 +10,7 @@ import Navbar from './components/Navbar';
 import RecipeDetails from './components/RecipeDetails';
 import Favorites from './components/Favorites'; 
 import MyRecipes from './components/MyRecipes'; 
-import EditRecipe from './components/EditRecipe'; // Importa el componente de edición
+import EditRecipe from './components/EditRecipe';
 import { RecipeContext } from './context/RecipeContext';
 
 function App() {
@@ -38,9 +38,7 @@ function App() {
     <Router>
       <div>
         <Navbar loggedInUser={loggedInUser} handleLogout={handleLogout} />
-        
         <div className="container">
-          
           <Routes>
             <Route
               path="/register"
@@ -71,20 +69,20 @@ function App() {
               }
             />
             <Route
-              path="/recipes/:id" // Cambiar a usar id
+              path="/recipes/:id"
               element={<RecipeDetails loggedInUser={loggedInUser} />}
             />
             <Route
-              path="/edit-recipe/:id" // Asegúrate de que esta ruta reciba el ID
+              path="/edit-recipe/:id"
               element={<EditRecipe />}
             />
             <Route
               path="/favorites"
-              element={<Favorites />}
+              element={<Favorites loggedInUser={loggedInUser} />}
             />
             <Route
               path="/my-recipes"
-              element={<MyRecipes />}
+              element={<MyRecipes loggedInUser={loggedInUser} />}
             />
           </Routes>
         </div>
