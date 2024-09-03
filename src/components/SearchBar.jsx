@@ -1,5 +1,14 @@
-import React from 'react';
+import React from "react";
 
+/**
+ * SearchBar - Componente para la barra de búsqueda de recetas.
+ *
+ * @param {Object} props - Las propiedades del componente.
+ * @param {string} props.query - El texto actual en la barra de búsqueda.
+ * @param {function} props.setQuery - La función para actualizar el texto de búsqueda.
+ *
+ * @returns {JSX.Element} El componente de la barra de búsqueda.
+ */
 function SearchBar({ query, setQuery }) {
   return (
     <div className="flex justify-center mt-8">
