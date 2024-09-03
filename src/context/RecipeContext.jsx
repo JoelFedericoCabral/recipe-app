@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { createContext, useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * Contexto de las recetas.
@@ -13,25 +13,29 @@ export const RecipeContext = createContext();
  * @returns {JSX.Element} El proveedor del contexto.
  */
 export const RecipeProvider = ({ children }) => {
+  // Estado para almacenar las recetas, cargadas desde localStorage si existen
   const [recipes, setRecipes] = useState(() => {
-    const savedRecipes = localStorage.getItem('recipes');
+    const savedRecipes = localStorage.getItem("recipes");
     return savedRecipes ? JSON.parse(savedRecipes) : [];
   });
 
+  // Estado para almacenar las recetas favoritas por usuario
   const [favorites, setFavorites] = useState(() => {
-    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || {};
+    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || {};
     return savedFavorites;
   });
 
-  const [recipeToEdit, setRecipeToEdit] = useState(null);
-  const [originalId, setOriginalId] = useState('');
+  const [recipeToEdit, setRecipeToEdit] = useState(null); // Estado para la receta que se va a editar
+  const [originalId, setOriginalId] = useState(""); // Estado para el ID original de la receta
 
+  // Guarda las recetas en localStorage cada vez que cambian
   useEffect(() => {
-    localStorage.setItem('recipes', JSON.stringify(recipes));
+    localStorage.setItem("recipes", JSON.stringify(recipes));
   }, [recipes]);
 
+  // Guarda las recetas favoritas en localStorage cada vez que cambian
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
   /**
@@ -50,11 +54,11 @@ export const RecipeProvider = ({ children }) => {
   const updateRecipe = (updatedRecipe) => {
     setRecipes(
       recipes.map((recipe) =>
-        recipe.id === originalId ? updatedRecipe : recipe
-      )
+        recipe.id === originalId ? updatedRecipe : recipe,
+      ),
     );
     setRecipeToEdit(null);
-    setOriginalId('');
+    setOriginalId("");
   };
 
   /**

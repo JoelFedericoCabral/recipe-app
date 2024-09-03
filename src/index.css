@@ -1,9 +1,11 @@
+/* Importa los estilos base de Tailwind CSS que resetean y normalizan estilos comunes en los navegadores */
 @tailwind base;
+
+/* Importa los componentes de Tailwind CSS, que incluyen estilos predefinidos como formularios, botones, etc. */
 @tailwind components;
+
+/* Importa las utilidades de Tailwind CSS, que proporcionan las clases de utilidad que se utilizan a lo largo de tu aplicación */
 @tailwind utilities;
-
-
-
 
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
