@@ -12,7 +12,7 @@ const recetas = [];
 
 // Ruta base para verificar que el servidor funciona
 app.get('/', (req, res) => {
-  res.send('API de Recetas funcionando');
+  res.send('API de Recetas Funcionando');
 });
 
 // Endpoint POST para agregar una nueva receta
